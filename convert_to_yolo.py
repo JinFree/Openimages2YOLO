@@ -61,7 +61,6 @@ for idx in range(len(folder_list)):
         else:
             filename = line_list[0]
             label_path = os.path.join(img_root, filename + ".txt")
-            print(label_path)
             ff = open(label_path,'w')
             ff.write(line_to_write)
             ff.close()
