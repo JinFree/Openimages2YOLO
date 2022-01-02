@@ -2,7 +2,7 @@ import os
 import cv2
 import numpy as np
 
-dataset_root = os.path.join("./", "data", "cctv_raw")
+dataset_root = os.path.join("./", "data")
 
 csv_list = [
     "sub-train-annotations-bbox.csv",
