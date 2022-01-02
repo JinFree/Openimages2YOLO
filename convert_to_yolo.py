@@ -2,7 +2,7 @@ import os
 import cv2
 import numpy as np
 
-dataset_root = os.path.join("./", "data")
+dataset_root = os.path.join("./", "data2")
 
 csv_list = [
     "sub-train-annotations-bbox.csv",
@@ -47,28 +47,48 @@ for idx in range(len(folder_list)):
     images_f = open(images_txt, 'w')
     f = open(csv_path, 'r')
     filename = "ImageID"
+    lines_to_write = []
+    label_path = os.path.join(img_root, filename + ".txt")     
+    first = True
+    line = f.readline()
+    line = f.readline()
+    line_list = line.split(',')
+    line_to_write = line2data(line_list)
+    filename = line_list[0]
+
     while True:
         line = f.readline()
         if not line: 
             break
         line_list = line.split(',')
-        if line_list[0] == filename:
-            continue
         line_to_write = line2data(line_list)
+
         if filename == line_list[0]:
-            label_path = os.path.join(img_root, filename + ".txt")
-            ff = open(label_path,'a')
-            ff.write(line_to_write)
-            ff.close()
-        else:
-            filename = line_list[0]
-            label_path = os.path.join(img_root, filename + ".txt")
+            lines_to_write.append(line_to_write)
+
+        elif filename != line_list[0]:
+            label_path = os.path.join(img_root, filename + ".txt")      
             ff = open(label_path,'w')
-            ff.write(line_to_write)
+            ff.writelines(lines_to_write)
             ff.close()
-        image_path = os.path.join(img_root, filename + ".jpg")
-        image_path = os.path.abspath(image_path)
-        images_f.write(image_path + "\n")
+            image_path = os.path.join(img_root, filename + ".jpg")
+            image_path = os.path.abspath(image_path)
+            images_f.write(image_path + "\n")
+
+            filename = line_list[0]
+            lines_to_write = []
+            lines_to_write.append(line_to_write)
+
+
+    label_path = os.path.join(img_root, filename + ".txt")      
+    ff = open(label_path,'w')
+    ff.writelines(lines_to_write)
+    ff.close()
+    image_path = os.path.join(img_root, filename + ".jpg")
+    image_path = os.path.abspath(image_path)
+    images_f.write(image_path + "\n")
+
+    print(label_path, lines_to_write)
     images_f.close()
     f.close()
 
