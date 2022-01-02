@@ -43,6 +43,8 @@ def line2data(line_list):
 for idx in range(len(folder_list)):
     csv_path = os.path.join(dataset_root, csv_list[idx])
     img_root = os.path.join(dataset_root, folder_list[idx])
+    images_txt = os.path.join(dataset_root, folder_list[idx] + ".txt")
+    images_f = open(images_txt, 'w')
     f = open(csv_path, 'r')
     filename = "ImageID"
     while True:
@@ -64,5 +66,11 @@ for idx in range(len(folder_list)):
             ff = open(label_path,'w')
             ff.write(line_to_write)
             ff.close()
+        image_path = os.path.join(img_root, filename + ".jpg")
+        image_path = os.path.abspath(image_path)
+        images_f.write(image_path + "\n")
+    images_f.close()
     f.close()
+
+
 
