@@ -19,7 +19,7 @@ classes = [
     "Car"
 ]
 
-class_txt = open(os.path.join(dataset_root, "class.tst"), 'w')
+class_txt = open(os.path.join(dataset_root, "class.txt"), 'w')
 for class_name in classes:
     class_txt.write(class_name + "\n")
 class_txt.close()
