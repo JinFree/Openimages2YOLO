@@ -88,7 +88,6 @@ for idx in range(len(folder_list)):
     image_path = os.path.abspath(image_path)
     images_f.write(image_path + "\n")
 
-    print(label_path, lines_to_write)
     images_f.close()
     f.close()
 
