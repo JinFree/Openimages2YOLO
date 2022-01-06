@@ -30,7 +30,7 @@ def line2data(line_list):
     xmax = float(line_list[5])
     ymin = float(line_list[6])
     ymax = float(line_list[7])
-    class_number = line_list[-1][:-1]
+    class_number = classes.index(line_list[-1][:-1])
     cx = (xmin+xmax)*0.5
     cy = (ymin+ymax)*0.5
     width = xmax-xmin
