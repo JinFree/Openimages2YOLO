@@ -15,8 +15,7 @@ folder_list = [
     "test"
 ]
 classes = [
-    "Person",
-    "Car"
+    "Person", "Car", "Bus", "Truck", "Ambulance", "Bicycle", "Motorcycle"
 ]
 
 class_txt = open(os.path.join(dataset_root, "class.txt"), 'w')
